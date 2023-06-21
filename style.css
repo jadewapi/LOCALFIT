@@ -6,14 +6,9 @@
 
 body {
     background-color: rgb(78, 78, 78);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
-.map {
-    width: 70%;
-    background-color: rgb(28, 107, 81);
-    height: 40rem;
+
+.hidden {
+    display: none;
 }

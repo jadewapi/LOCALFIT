@@ -10,8 +10,50 @@
     <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 </head>
 <body>
-    <div class="map">
+    <main>
+        <section class="interface">
+            <img src="" alt="" class="logo">
+            <section class="workoutsContainer">
+                <div class="specificWorkout">
+                    <form action="" class="logWorkout">
+                        <article class="type">
+                            <label>Type</label>
+                            <select class="select">
+                                <option value="Running">Running</option>
+                                <option value="Running">Cycling</option>
+                            </select>
+                        </article>
+                        <article class="duration">
+                            <label>Duration</label>
+                            <input type="text" class="min">
+                        </article>
+                        <article class="distance">
+                            <label>Distance</label>
+                            <input type="text" class="distance">
+                        </article>
+                        <article class="runningOrCycling">
+                            <article class="elevationGain">
+                                <label>Elevation Gain</label>
+                                <input type="text" class="elevationGain">
+                            </article>
+                            <article class="cadence hidden">
+                                <label>Cadence</label>
+                                <input type="text" class="cadence">
+                            </article>
+                        </article>
+                    </form>
+                    <article class="displayedSummary hidden">
+                        <div class="summaryType">f</div>
+                        <div class="summaryDuration">f</div>
+                        <div class="summaryDistance">f</div>
+                        <div class="summaryTypeMethod">k</div>
+                    </article>
+                </div>
+            </section>
+        </section>
+        <section id="map">
         
-    </div>
+        </section>
+    </main>
 </body>
 </html>
