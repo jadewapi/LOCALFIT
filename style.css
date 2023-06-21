@@ -4,11 +4,107 @@
     box-sizing: border-box;
 }
 
+html {
+    font-size: 65.5%;
+}
+
+input, select {
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+}
+
 body {
     background-color: rgb(78, 78, 78);
+    font-family: 'Poppins', sans-serif;
+}
+
+.jadepineda {
+    height: 2.5rem;
+    font-size: 1.75rem;
+    background: #238B24;
+    color: white;
+    text-align: center;
+}
+
+main {
+    height: 72.5rem;
+}
+
+.interface {
+    width: 30%;
+    height: 100%;
+    background-color: #8EC5FF;
+}
+
+.map {
+    width: 70%;
+    height: 100%;
+}
+
+.logoContainer {
+    height: 12.5rem;
+    text-align: center;
 }
 
 
-.hidden {
-    display: none;
+.logo {
+    height: 100%;
+    width: auto;
+}
+
+.workoutsContainer {
+    height: 57.5rem;
+    overflow: scroll;
+}
+
+.specificWorkout {
+    margin: 0 auto;
+    width: 90%;
+    border-radius: 20px;
+    height: 15rem;
+    padding: 1.5rem;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 0px );
+    -webkit-backdrop-filter: blur( 0px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+
+.specificWorkout:hover {
+    background: rgba(255, 255, 255, 0.40);
+}
+
+
+.specificWorkout:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+
+.logWorkout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100%;
+    row-gap: 2rem;
+}
+
+article > label {
+    font-size: 1.5rem;
+    color: #23508B;
+    font-weight: 700;
+}
+
+.logWorkout > article, .determineContainer > *{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.logWorkout > article > input, .logWorkout > article > select, .determineContainer > * > input{
+    width: 80%;
+    height: 60%;
+    text-align: center;
 }
