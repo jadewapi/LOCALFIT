@@ -161,3 +161,8 @@ article > label {
 svg {
     margin-bottom: 1rem;
 }
+
+.leaflet-popup-content-wrapper {
+    background-color: #575757;
+    color: white;
+}
