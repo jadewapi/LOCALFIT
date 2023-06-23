@@ -32,39 +32,39 @@
         <div class="logoContainer">
           <img src="images/TrackFitLogo.png" alt="" class="logo" />
         </div>
+        <form class="logWorkout">
+          <article class="type">
+            <label>Type</label>
+            <select class="select">
+              <option value="Running">Running</option>
+              <option value="Running">Cycling</option>
+            </select>
+          </article>
+          <article class="durationContainer">
+            <label>Duration</label>
+            <input type="text" class="durationInput" placeholder="minutes" />
+          </article>
+          <article class="distanceContainer">
+            <label>Distance</label>
+            <input type="text" class="distanceInput" placeholder="miles" />
+          </article>
+          <section class="determineContainer">
+            <article class="elevationGainContainer">
+              <label>Elevation Gain</label>
+              <input
+                type="text"
+                class="elevationGainInput"
+                placeholder="step per min"
+              />
+            </article>
+            <article class="cadenceContainer" style="display: none">
+              <label>Cadence</label>
+              <input type="text" class="cadenceInput" placeholder="meters" />
+            </article>
+          </section>
+          <button type="submit" style>OK</button>
+        </form>
         <section class="workoutsContainer">
-          <form class="logWorkout">
-            <article class="type">
-              <label>Type</label>
-              <select class="select">
-                <option value="Running">Running</option>
-                <option value="Running">Cycling</option>
-              </select>
-            </article>
-            <article class="durationContainer">
-              <label>Duration</label>
-              <input type="text" class="durationInput" placeholder="minutes" />
-            </article>
-            <article class="distanceContainer">
-              <label>Distance</label>
-              <input type="text" class="distanceInput" placeholder="miles" />
-            </article>
-            <section class="determineContainer">
-              <article class="elevationGainContainer">
-                <label>Elevation Gain</label>
-                <input
-                  type="text"
-                  class="elevationGainInput"
-                  placeholder="step per min"
-                />
-              </article>
-              <article class="cadenceContainer" style="display: none">
-                <label>Cadence</label>
-                <input type="text" class="cadenceInput" placeholder="meters" />
-              </article>
-            </section>
-            <button type="submit" style>OK</button>
-          </form>
           <div class="specificWorkout">
             <article class="displayedSummary">
               <div class="summaryType">Running on June 12</div>

@@ -8,6 +8,10 @@ html {
   font-size: 65.5%;
 }
 
+form > button {
+  display: none;
+}
+
 input,
 select {
   border: none;
@@ -92,6 +96,9 @@ main {
   grid-template-columns: 1fr 1fr;
   height: 15rem;
   row-gap: 2rem;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 article > label {
