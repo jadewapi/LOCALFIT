@@ -7,9 +7,6 @@ const elevationGainInput = document.querySelector(".elevationGainInput");
 const cadenceInput = document.querySelector(".cadenceInput");
 const displayedSummary = document.querySelector(".displayedSummary");
 
-displayedSummary.style.display = "none";
-logWorkout.style.display = "none";
-
 let map, mapEvent;
 
 navigator.geolocation.getCurrentPosition(
