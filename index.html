@@ -10,7 +10,6 @@
       integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
       crossorigin=""
     />
-    <script defer src="script.js"></script>
     <script
       defer
       src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -24,6 +23,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script defer src="script.js"></script>
   </head>
   <body>
     <div class="jadepineda">made by jade pineda</div>
@@ -34,7 +34,7 @@
         </div>
         <section class="workoutsContainer">
           <div class="specificWorkout">
-            <form action="" class="logWorkout">
+            <form class="logWorkout">
               <article class="type">
                 <label>Type</label>
                 <select class="select">
@@ -44,28 +44,37 @@
               </article>
               <article class="durationContainer">
                 <label>Duration</label>
-                <input type="text" class="min" placeholder="minutes" />
+                <input
+                  type="text"
+                  class="durationInput"
+                  placeholder="minutes"
+                />
               </article>
               <article class="distanceContainer">
                 <label>Distance</label>
-                <input type="text" class="distance" placeholder="miles" />
+                <input type="text" class="distanceInput" placeholder="miles" />
               </article>
               <section class="determineContainer">
                 <article class="elevationGainContainer">
                   <label>Elevation Gain</label>
                   <input
                     type="text"
-                    class="elevationGain"
+                    class="elevationGainInput"
                     placeholder="step per min"
                   />
                 </article>
                 <article class="cadenceContainer" style="display: none">
                   <label>Cadence</label>
-                  <input type="text" class="cadence" placeholder="meters" />
+                  <input
+                    type="text"
+                    class="cadenceInput"
+                    placeholder="meters"
+                  />
                 </article>
               </section>
+              <button type="submit">OK</button>
             </form>
-            <article class="displayedSummary" style="display: none">
+            <article class="displayedSummary">
               <div class="summaryType">Running on June 12</div>
               <div class="summaryDistance">
                 <svg
