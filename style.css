@@ -17,6 +17,9 @@ select {
   border: none;
   font-family: "Poppins", sans-serif;
   outline: none;
+  border-radius: 20px;
+  color: #636363;
+  font-weight: 800;
 }
 
 body {
@@ -255,8 +258,8 @@ svg {
   }
 }
 
-
 @media (width < 64em) {
   .logWorkout {
     width: 100%;
   }
+}
