@@ -1,11 +1,11 @@
 "use strict";
-
 const logWorkout = document.querySelector(".logWorkout");
 const durationInput = document.querySelector(".durationInput");
 const distanceInput = document.querySelector(".distanceInput");
 const elevationGainInput = document.querySelector(".elevationGainInput");
 const cadenceInput = document.querySelector(".cadenceInput");
 const displayedSummary = document.querySelector(".displayedSummary");
+const specificWorkout = document.querySelectorAll(".specificWorkout");
 
 let map, mapEvent;
 

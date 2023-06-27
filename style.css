@@ -20,21 +20,36 @@ select {
 }
 
 body {
-  background-color: rgb(78, 78, 78);
   font-family: "Poppins", sans-serif;
+  max-height: 1861px;
+  background-color: #8ec5ff;
+  min-width: 978px;
 }
 
-.jadepineda {
-  height: 2.5rem;
-  font-size: 1.75rem;
+header {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #238b24;
   color: white;
-  text-align: center;
+  font-size: 2rem;
 }
 
 main {
-  height: 72.5rem;
+  height: 73rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #8ec5ff;
+}
+
+.mainWrapper {
+  height: 68rem;
+  width: 95%;
+  max-width: 1857px;
+  display: flex;
+  gap: 2rem;
 }
 
 .interface {
@@ -55,7 +70,7 @@ main {
 }
 
 .logoContainer {
-  height: 12.5rem;
+  height: 10rem;
   text-align: center;
 }
 
@@ -65,8 +80,8 @@ main {
 }
 
 .workoutsContainer {
-  height: 57.5rem;
-  overflow: scroll;
+  height: 46rem;
+  overflow-y: scroll;
 }
 
 .specificWorkout {
@@ -76,11 +91,21 @@ main {
   height: 15rem;
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  border-radius: 20px;
+  background-color: rgb(171, 211, 255);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(35, 80, 139);
+  border-radius: 20px;
 }
 
 .specificWorkout:hover {
@@ -94,8 +119,7 @@ main {
 .logWorkout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 15rem;
-  row-gap: 2rem;
+  height: 10rem;
   width: 80%;
   margin: 0 auto;
   margin-bottom: 2rem;
@@ -188,3 +212,51 @@ svg {
 .cycling {
   border-left: 10px solid rgb(255, 242, 0);
 }
+
+@media (height > 850px) and (width > 1857px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+@media (height > 850px) and (width < 978px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+@media (width < 74em) {
+  .summaryType {
+    font-size: 2.3rem;
+    align-self: center;
+  }
+  .displayedSummary > * > svg {
+    height: 2.5rem;
+    left: 10%;
+  }
+  .displayedSummary > :not(:first-child) {
+    align-self: center;
+  }
+  .displayedSummary > div > p {
+    font-size: 1rem;
+  }
+}
+
+@media (width < 69em) {
+  .summaryType {
+    font-size: 2rem;
+    align-self: center;
+  }
+}
+
+
+@media (width < 64em) {
+  .logWorkout {
+    width: 100%;
+  }
