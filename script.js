@@ -16,16 +16,17 @@ cadenceContainer.style.display = "none";
 elevationGainInput.setAttribute("required", "");
 
 class App {
-  constructor() {}
-  _getPosition() {}
-  _loadMap() {}
-  _showForm() {}
-  _toggleElevationField() {}
-  _newWorkout() {}
-}
-
-navigator.geolocation.getCurrentPosition(
-  function (position) {
+  constructor() {
+    this._getPosition();
+  }
+  //
+  _getPosition() {
+    navigator.geolocation.getCurrentPosition(this._loadMap, function () {
+      alert("Please allow location");
+    });
+  }
+  //
+  _loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
     const coordinates = [latitude, longitude];
@@ -49,20 +50,23 @@ navigator.geolocation.getCurrentPosition(
         .addTo(map)
         .bindPopup(
           L.popup({
-            minWidth: 200,
-            maxWidth: 70,
+            minWidth: 100,
+            maxWidth: 20,
             autoClose: false,
             closeOnClick: false,
+            className: "running",
           })
         )
-        .setPopupContent('<p class="booty">This is some good shit</p>')
+        .setPopupContent('<p class="popupInfo">Running on July 21</p>')
         .openPopup();
     });
-  },
-  function () {
-    alert("Please allow location");
   }
-);
+  _showForm() {}
+  _toggleElevationField() {}
+  _newWorkout() {}
+}
+
+const app = new App();
 
 selectType.addEventListener("change", function () {
   const selectedOption = selectType.value;

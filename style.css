@@ -311,6 +311,7 @@ select:focus {
 .leaflet-popup-content-wrapper {
   background-color: rgb(254, 254, 254);
   color: rgb(72, 72, 72);
+  width: fit-content;
 }
 
 .leaflet-container a.leaflet-popup-close-button {
@@ -319,10 +320,32 @@ select:focus {
 
 .leaflet-popup-content {
   font-family: "Poppins";
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 800;
+  width: fit-content;
+}
+
+.leaflet-popup-content p {
+  margin-left: -15px;
+}
+
+.leaflet-popup-tip-container {
+  margin-left: -30px;
 }
 
 .hidden {
   display: none;
+}
+
+.popupInfo {
+  text-align: center;
+  width: fit-content;
+}
+
+.cycling {
+  border-left: 20px solid rgb(255, 216, 42);
+}
+
+.running {
+  border-left: 20px solid rgb(155, 105, 255);
 }
