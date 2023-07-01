@@ -17,6 +17,8 @@ select {
   border: none;
   font-family: "Poppins", sans-serif;
   outline: none;
+  color: #6e6e6e;
+  border-radius: 20px;
 }
 
 body {
@@ -123,6 +125,7 @@ main {
   width: 80%;
   margin: 0 auto;
   margin-bottom: 2rem;
+  transition: opacity 0.5s ease;
 }
 
 article > label {
@@ -283,4 +286,43 @@ svg {
     width: 100%;
     height: 50%;
   }
+}
+
+.durationInput:focus {
+  border: 2px solid #214f8a;
+}
+
+.distanceInput:focus {
+  border: 2px solid #214f8a;
+}
+
+.elevationGainInput:focus {
+  border: 2px solid #214f8a;
+}
+
+.cadenceInput:focus {
+  border: 2px solid #214f8a;
+}
+
+select:focus {
+  border: 2px solid #214f8a;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: rgb(254, 254, 254);
+  color: rgb(72, 72, 72);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  background-color: red;
+}
+
+.leaflet-popup-content {
+  font-family: "Poppins";
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.hidden {
+  display: none;
 }
