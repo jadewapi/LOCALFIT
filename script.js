@@ -15,14 +15,21 @@ const cadenceInput = document.querySelector(".cadenceInput");
 cadenceContainer.style.display = "none";
 elevationGainInput.setAttribute("required", "");
 
-let map;
-
 class App {
   #map;
-  #clickedCoordinateObject;
-
+  #mapEvent;
+  #inputValues;
+  //
   constructor() {
     this._getPosition();
+    selectType.addEventListener(
+      "change",
+      this._toggleElevationField.bind(this)
+    );
+    //
+    logWorkout.addEventListener("input", this._checkInputForNumbers.bind(this));
+    //
+    logWorkout.addEventListener("submit", this._submitForm);
   }
   //
   _getPosition() {
@@ -47,65 +54,55 @@ class App {
     }).addTo(this.#map);
     //
     //
-    this.#map.on("click", function (clickedCoordinateObject) {
-      this.#clickedCoordinateObject = clickedCoordinateObject;
-      const { lat } = this.#clickedCoordinateObject.latlng;
-      const { lng } = this.#clickedCoordinateObject.latlng;
-      const clickCoordinates = [lat, lng];
-      logWorkout.classList.toggle("hidden");
-      //
-      L.marker(this.#clickCoordinates)
-        .addTo(this.#map)
-        .bindPopup(
-          L.popup({
-            minWidth: 100,
-            maxWidth: 20,
-            autoClose: false,
-            closeOnClick: false,
-            className: "running",
-          })
-        )
-        .setPopupContent('<p class="popupInfo">Running on July 21</p>')
-        .openPopup();
-    });
+    this.#map.on("click", this._showForm.bind(this));
   }
-  _showForm() {}
-  _toggleElevationField() {}
+  _showForm(mapEvent) {
+    this.#mapEvent = mapEvent;
+    console.log(this.#mapEvent);
+    const { lat } = this.#mapEvent.latlng;
+    const { lng } = this.#mapEvent.latlng;
+    const clickCoordinates = [lat, lng];
+    logWorkout.classList.toggle("hidden");
+  }
+  _toggleElevationField() {
+    const selectedOption = selectType.value;
+    //
+    if (selectedOption === "Running") {
+      elevationGainContainer.style.display = "";
+      elevationGainInput.setAttribute("required", "");
+      cadenceInput.removeAttribute("required");
+      cadenceContainer.style.display = "none";
+    } else if (selectedOption === "Cycling") {
+      cadenceContainer.style.display = "";
+      cadenceInput.setAttribute("required", "");
+      elevationGainInput.removeAttribute("required");
+      elevationGainContainer.style.display = "none";
+    }
+  }
+  _checkInputForNumbers(inputValues) {
+    this.#inputValues = inputValues;
+    const target = this.#inputValues.target;
+    if (target.tagName === "INPUT") {
+      const currentValue = target.value;
+      const sanitizedValue = currentValue.replace(/[^0-9]/g, "");
+      target.value = sanitizedValue;
+    }
+  }
+  _submitForm(e) {
+    e.preventDefault();
+    console.log(
+      durationInput.value,
+      distanceInput.value,
+      elevationGainInput.value,
+      cadenceInput.value
+    );
+    durationInput.value =
+      distanceInput.value =
+      elevationGainInput.value =
+      cadenceInput.value =
+        "";
+  }
   _newWorkout() {}
 }
 
 const app = new App();
-
-selectType.addEventListener("change", function () {
-  const selectedOption = selectType.value;
-  //
-  if (selectedOption === "Running") {
-    elevationGainContainer.style.display = "";
-    elevationGainInput.setAttribute("required", "");
-    cadenceInput.removeAttribute("required");
-    cadenceContainer.style.display = "none";
-  } else if (selectedOption === "Cycling") {
-    cadenceContainer.style.display = "";
-    cadenceInput.setAttribute("required", "");
-    elevationGainInput.removeAttribute("required");
-    elevationGainContainer.style.display = "none";
-  }
-});
-//
-logWorkout.addEventListener("input", function (e) {
-  const target = e.target;
-  if (target.tagName === "INPUT") {
-    const currentValue = target.value;
-    const sanitizedValue = currentValue.replace(/[^0-9]/g, "");
-    target.value = sanitizedValue;
-  }
-});
-//
-logWorkout.addEventListener("submit", function (e) {
-  e.preventDefault();
-  durationInput.value =
-    distanceInput.value =
-    elevationGainInput.value =
-    cadenceInput.value =
-      "";
-});
