@@ -15,15 +15,23 @@ const cadenceInput = document.querySelector(".cadenceInput");
 cadenceContainer.style.display = "none";
 elevationGainInput.setAttribute("required", "");
 
+let map;
+
 class App {
+  #map;
+  #clickedCoordinateObject;
+
   constructor() {
     this._getPosition();
   }
   //
   _getPosition() {
-    navigator.geolocation.getCurrentPosition(this._loadMap, function () {
-      alert("Please allow location");
-    });
+    navigator.geolocation.getCurrentPosition(
+      this._loadMap.bind(this),
+      function () {
+        alert("Please allow location");
+      }
+    );
   }
   //
   _loadMap(position) {
@@ -31,23 +39,23 @@ class App {
     const { longitude } = position.coords;
     const coordinates = [latitude, longitude];
     //
-    const map = L.map("map").setView(coordinates, 13);
+    this.#map = L.map("map").setView(coordinates, 13);
     //
     L.tileLayer("https://{s}.tile.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png", {
       attribution:
         'CycloSM &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
+    }).addTo(this.#map);
     //
     //
-    map.on("click", function (e) {
-      console.log(e);
-      const { lat } = e.latlng;
-      const { lng } = e.latlng;
+    this.#map.on("click", function (clickedCoordinateObject) {
+      this.#clickedCoordinateObject = clickedCoordinateObject;
+      const { lat } = this.#clickedCoordinateObject.latlng;
+      const { lng } = this.#clickedCoordinateObject.latlng;
       const clickCoordinates = [lat, lng];
       logWorkout.classList.toggle("hidden");
       //
-      L.marker(clickCoordinates)
-        .addTo(map)
+      L.marker(this.#clickCoordinates)
+        .addTo(this.#map)
         .bindPopup(
           L.popup({
             minWidth: 100,
