@@ -16,7 +16,9 @@ cadenceContainer.style.display = "none";
 elevationGainInput.setAttribute("required", "");
 
 class App {
+  // the map div
   #map;
+  // a specific coordinate that is an object that is clicked in the map div
   #mapEvent;
   #inputValues;
   //
@@ -29,9 +31,9 @@ class App {
     //
     logWorkout.addEventListener("input", this._checkInputForNumbers.bind(this));
     //
-    logWorkout.addEventListener("submit", this._submitForm);
+    logWorkout.addEventListener("submit", this._newWorkout);
   }
-  //
+  // uses geolocation APU to get position object.
   _getPosition() {
     navigator.geolocation.getCurrentPosition(
       this._loadMap.bind(this),
@@ -40,7 +42,7 @@ class App {
       }
     );
   }
-  //
+  // produces the map and adds the user's location
   _loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
@@ -56,6 +58,7 @@ class App {
     //
     this.#map.on("click", this._showForm.bind(this));
   }
+  // shows form for each odd number amount of clicks.
   _showForm(mapEvent) {
     this.#mapEvent = mapEvent;
     console.log(this.#mapEvent);
@@ -64,6 +67,7 @@ class App {
     const clickCoordinates = [lat, lng];
     logWorkout.classList.toggle("hidden");
   }
+  // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
   _toggleElevationField() {
     const selectedOption = selectType.value;
     //
@@ -79,6 +83,7 @@ class App {
       elevationGainContainer.style.display = "none";
     }
   }
+  // validates form input by restricting to only numbers
   _checkInputForNumbers(inputValues) {
     this.#inputValues = inputValues;
     const target = this.#inputValues.target;
@@ -88,7 +93,8 @@ class App {
       target.value = sanitizedValue;
     }
   }
-  _submitForm(e) {
+  // adds a new workout based on the options selected in the select HTML tag.
+  _newWorkout(e) {
     e.preventDefault();
     console.log(
       durationInput.value,
@@ -102,7 +108,6 @@ class App {
       cadenceInput.value =
         "";
   }
-  _newWorkout() {}
 }
 
 const app = new App();
