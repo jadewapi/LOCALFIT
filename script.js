@@ -28,6 +28,10 @@ class Running extends Workout {
   constructor(duration, distance, elevationGain) {
     super(duration, distance);
     this.elevationGain = elevationGain;
+    this.calculatePace();
+  }
+  calculatePace() {
+    return (this.speed = this.duration / this.distance);
   }
 }
 
@@ -37,6 +41,10 @@ class Cycling extends Workout {
   constructor(duration, distance, cadence) {
     super(type, duration, distance);
     this.cadence = cadence;
+    this.calculateSpeed();
+  }
+  calculateSpeed() {
+    return (this.speed = this.distance / (this.duration / 60));
   }
 }
 
@@ -44,7 +52,7 @@ class App {
   // the map div
   #map;
   // a specific coordinate that is an object that is clicked in the map div
-  mapEvent;
+  #mapEvent;
   #inputValues;
   //
   constructor() {
@@ -56,7 +64,7 @@ class App {
     //
     logWorkout.addEventListener("input", this._checkInputForNumbers.bind(this));
     //
-    logWorkout.addEventListener("submit", this._newWorkout);
+    logWorkout.addEventListener("submit", this._newWorkout.bind(this));
   }
   // uses geolocation APU to get position object.
   _getPosition() {
@@ -85,9 +93,10 @@ class App {
   }
   // shows form for each odd number amount of clicks.
   _showForm(mapEvent) {
-    this.mapEvent = mapEvent;
-    const { lat } = this.mapEvent.latlng;
-    const { lng } = this.mapEvent.latlng;
+    this.#mapEvent = mapEvent;
+    console.log(this.#mapEvent);
+    const { lat } = this.#mapEvent.latlng;
+    const { lng } = this.#mapEvent.latlng;
     logWorkout.classList.toggle("hidden");
   }
   // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
@@ -119,7 +128,6 @@ class App {
   // adds a new workout based on the options selected in the select HTML tag.
   _newWorkout(e) {
     e.preventDefault();
-    console.log(this.mapEvent);
     durationInput.value =
       distanceInput.value =
       elevationGainInput.value =
