@@ -44,7 +44,7 @@ class App {
   // the map div
   #map;
   // a specific coordinate that is an object that is clicked in the map div
-  mapEvent;
+  #mapEvent;
   #inputValues;
   //
   constructor() {
@@ -85,9 +85,9 @@ class App {
   }
   // shows form for each odd number amount of clicks.
   _showForm(mapEvent) {
-    this.mapEvent = mapEvent;
-    const { lat } = this.mapEvent.latlng;
-    const { lng } = this.mapEvent.latlng;
+    this.#mapEvent = mapEvent;
+    const { lat } = this.#mapEvent.latlng;
+    const { lng } = this.#mapEvent.latlng;
     logWorkout.classList.toggle("hidden");
   }
   // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)

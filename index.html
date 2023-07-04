@@ -35,35 +35,52 @@
           <div class="logoContainer">
             <img src="images/TrackFitLogo.png" alt="" class="logo" />
           </div>
-          <form class="logWorkout">
+          <form class="logWorkout hidden">
             <article class="type">
               <label>Type</label>
-              <select class="select">
+              <select class="select" required>
                 <option value="Running">Running</option>
-                <option value="Running">Cycling</option>
+                <option value="Cycling">Cycling</option>
               </select>
             </article>
             <article class="durationContainer">
               <label>Duration</label>
-              <input type="text" class="durationInput" placeholder="minutes" />
+              <input
+                name="duration"
+                type="text"
+                class="durationInput"
+                placeholder="minutes"
+                required
+              />
             </article>
             <article class="distanceContainer">
               <label>Distance</label>
-              <input type="text" class="distanceInput" placeholder="miles" />
+              <input
+                name="distance"
+                type="text"
+                class="distanceInput"
+                placeholder="miles"
+                required
+              />
             </article>
             <section class="determineContainer">
               <article class="elevationGainContainer">
                 <label>Elevation Gain</label>
                 <input
+                  name="elevation"
                   type="text"
                   class="elevationGainInput"
                   placeholder="step per min"
                 />
               </article>
-              <article class="cadenceContainer" style="display: none">
+              <article class="cadenceContainer">
                 <label>Cadence</label>
-                <input type="text" class=j?BMNV<fn;cadenceInput"
-                placeholder="meters" />
+                <input
+                  name="cadence"
+                  type="text"
+                  class="cadenceInput"
+                  placeholder="meters"
+                />
               </article>
             </section>
             <button type="submit" style>OK</button>
