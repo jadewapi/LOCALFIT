@@ -349,3 +349,7 @@ select:focus {
 .running {
   border-left: 20px solid rgb(155, 105, 255);
 }
+
+#map {
+  user-select: none;
+}
