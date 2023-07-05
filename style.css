@@ -181,10 +181,15 @@ article > label {
 
 .svgCadence {
   position: relative;
-  left: 10%;
+  left: 25%;
 }
 
 .svgSpeed {
+  position: relative;
+  left: 10%;
+}
+
+.svgElevationGain {
   position: relative;
   left: 10%;
 }
