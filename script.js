@@ -15,32 +15,51 @@ const cadenceInput = document.querySelector(".cadenceInput");
 cadenceContainer.style.display = "none";
 elevationGainInput.setAttribute("required", "");
 
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "November",
+  "December",
+];
+
 class Workout {
-  constructor(duration, distance) {
+  date = new Date();
+  id = (new Date() + "").slice(-10);
+  //
+  constructor(coordinates, duration, distance) {
+    this.coordinates = coordinates;
     this.duration = duration;
     this.distance = distance;
   }
 }
 
 class Running extends Workout {
-  type = "Running";
-  //
-  constructor(duration, distance, elevationGain) {
-    super(duration, distance);
-    this.elevationGain = elevationGain;
+  constructor(coordinates, duration, distance, cadence) {
+    super(coordinates, duration, distance);
+    this.type = "Running";
+    this.cadence = cadence;
     this.calculatePace();
   }
   calculatePace() {
-    return (this.speed = this.duration / this.distance);
+    return (this.pace = this.duration / this.distance);
+  }
+  displayHTML() {
+    return ``;
   }
 }
 
 class Cycling extends Workout {
-  type = "Cycling";
-  //
-  constructor(duration, distance, cadence) {
+  constructor(coordinates, duration, distance, elevationGain) {
     super(type, duration, distance);
-    this.cadence = cadence;
+    this.type = "Cycling";
+    this.elevationGain = elevationGain;
     this.calculateSpeed();
   }
   calculateSpeed() {
@@ -54,8 +73,10 @@ class App {
   // a specific coordinate that is an object that is clicked in the map div
   #mapEvent;
   #inputValues;
+  #allWorkouts;
   //
   constructor() {
+    this.#allWorkouts = [];
     this._getPosition();
     selectType.addEventListener(
       "change",
@@ -101,14 +122,13 @@ class App {
   }
   // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
   _toggleElevationField() {
-    const selectedOption = selectType.value;
     //
-    if (selectedOption === "Running") {
+    if (selectType.value === "Running") {
       elevationGainContainer.style.display = "";
       elevationGainInput.setAttribute("required", "");
       cadenceInput.removeAttribute("required");
       cadenceContainer.style.display = "none";
-    } else if (selectedOption === "Cycling") {
+    } else if (selectType.value === "Cycling") {
       cadenceContainer.style.display = "";
       cadenceInput.setAttribute("required", "");
       elevationGainInput.removeAttribute("required");
@@ -128,6 +148,23 @@ class App {
   // adds a new workout based on the options selected in the select HTML tag.
   _newWorkout(e) {
     e.preventDefault();
+    //
+    let workout;
+    if (selectType.value === "Running") {
+      workout = new Running(
+        Number(durationInput.value),
+        Number(distanceInput.value),
+        Number(elevationGainInput.value)
+      );
+    } else if (selectType.value === "Cycling") {
+      workout = new Running(
+        Number(durationInput.value),
+        Number(distanceInput.value),
+        Number(cadenceInput.value)
+      );
+    }
+    console.log(workout);
+    //
     durationInput.value =
       distanceInput.value =
       elevationGainInput.value =
