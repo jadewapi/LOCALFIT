@@ -41,7 +41,7 @@ class Workout {
   id = this.date.getTime() + 1;
   //
   constructor(coordinates, duration, distance) {
-    this.coordinates = this.roundTwoDecimalPlaces(coordinates);
+    this.coordinates = coordinates;
     this.duration = this.roundTwoDecimalPlaces(duration);
     this.distance = this.roundTwoDecimalPlaces(distance);
   }
@@ -262,9 +262,18 @@ class App {
       attribution:
         'CycloSM &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
+
     //
     //
-    this.#map.on("click", this._showForm.bind(this));
+    this.#map.on("click", () => {
+      this._showForm.bind(this);
+      L.marker([51.5, -0.09])
+        .addTo(this.#map)
+        .bindPopup(
+          L.popup({ maxWidth: 120, autoClose: false, closeOnClick: false })
+        )
+        .openPopup();
+    });
   }
   // shows form for each odd number amount of clicks.
   _showForm(mapEvent) {
@@ -323,6 +332,7 @@ class App {
     this.#allWorkouts.push(workout);
     this._addOnHTMLWorkouts(workout.HTML());
     this._clearInputValues();
+    //
   }
   _determineWorkOutInput(type) {
     if (type === "Running") {
