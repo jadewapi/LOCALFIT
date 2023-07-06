@@ -274,11 +274,11 @@ select:focus {
   width: fit-content;
 }
 
-.cycling {
+.Cycling {
   border-left: 20px solid rgb(255, 216, 42);
 }
 
-.running {
+.Running {
   border-left: 20px solid rgb(155, 105, 255);
 }
 

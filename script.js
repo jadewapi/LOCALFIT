@@ -265,15 +265,7 @@ class App {
 
     //
     //
-    this.#map.on("click", () => {
-      this._showForm.bind(this);
-      L.marker([51.5, -0.09])
-        .addTo(this.#map)
-        .bindPopup(
-          L.popup({ maxWidth: 120, autoClose: false, closeOnClick: false })
-        )
-        .openPopup();
-    });
+    this.#map.on("click", this._showForm.bind(this));
   }
   // shows form for each odd number amount of clicks.
   _showForm(mapEvent) {
@@ -369,6 +361,19 @@ class App {
   }
   _addOnHTMLWorkouts(html) {
     workoutsContainer.insertAdjacentHTML("afterbegin", html);
+  }
+  _addMarker(workout) {
+    L.marker(workout.coordinates)
+      .addTo(this.#map)
+      .bindPopup(
+        L.popup({
+          maxWidth: 250,
+          minWidth: 100,
+          autoClose: false,
+          closeOnClick: false,
+          className: `${workout.type}`,
+        })
+      );
   }
 }
 
