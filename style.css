@@ -94,7 +94,6 @@ main {
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -166,7 +165,7 @@ article > label {
 }
 
 .displayedSummary > :not(:first-child) {
-  align-self: self-end;
+  align-self: end;
 }
 
 .svgDistance {
@@ -219,78 +218,6 @@ svg {
 
 .cycling {
   border-left: 10px solid rgb(255, 242, 0);
-}
-
-@media (height > 850px) and (width > 1857px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-  }
-}
-
-@media (height > 850px) and (width < 978px) {
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-  }
-}
-
-@media (width < 74em) {
-  .summaryType {
-    font-size: 2.3rem;
-    align-self: center;
-  }
-  .displayedSummary > * > svg {
-    height: 2.5rem;
-    left: 10%;
-  }
-  .displayedSummary > :not(:first-child) {
-    align-self: center;
-  }
-  .displayedSummary > div > p {
-    font-size: 1rem;
-  }
-}
-
-@media (width < 69em) {
-  .summaryType {
-    font-size: 2rem;
-    align-self: center;
-  }
-}
-
-@media (width < 64em) {
-  .logWorkout {
-    width: 100%;
-  }
-}
-
-@media (width < 61em) {
-  .summaryType {
-    font-size: 1.7rem;
-  }
-}
-
-@media (width < 48em) {
-  main {
-    height: fit-content;
-  }
-  .mainWrapper {
-    flex-direction: column;
-    height: 200vh;
-  }
-  .mainWrapper > * {
-    width: 100%;
-    height: 40%;
-  }
-  #map {
-    width: 100%;
-    height: 50%;
-  }
 }
 
 .durationInput:focus {
@@ -357,4 +284,86 @@ select:focus {
 
 #map {
   user-select: none;
+}
+
+@media (height > 850px) and (width > 1857px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+@media (height > 850px) and (width < 978px) {
+  body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+  }
+}
+
+@media (width < 74em) {
+  .summaryType {
+    font-size: 2.3rem;
+    align-self: center;
+  }
+  .displayedSummary > * > svg {
+    height: 2.5rem;
+    left: 10%;
+  }
+  .displayedSummary > :not(:first-child) {
+    align-self: end;
+  }
+  .displayedSummary > div > p {
+    font-size: 1rem;
+  }
+}
+
+@media (width < 69em) {
+  .summaryType {
+    font-size: 2rem;
+    align-self: center;
+  }
+}
+
+@media (width < 64em) {
+  .logWorkout {
+    width: 100%;
+  }
+}
+
+@media (width < 61em) {
+  .summaryType {
+    font-size: 1.7rem;
+  }
+}
+
+@media (width < 53em) {
+  .specificWorkout {
+    width: 97%;
+  }
+  .displayedSummary > * > svg {
+    height: 2rem;
+    left: 10%;
+  }
+}
+
+@media (width < 48em) {
+  main {
+    height: fit-content;
+  }
+  .mainWrapper {
+    flex-direction: column;
+    height: 200vh;
+  }
+  .mainWrapper > * {
+    width: 100%;
+    height: 40%;
+  }
+  #map {
+    width: 100%;
+    height: 50%;
+  }
 }
