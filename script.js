@@ -2,18 +2,21 @@
 
 const logWorkout = document.querySelector(".logWorkout");
 const selectType = document.querySelector(".select");
+const durationInput = document.querySelector(".durationInput");
+const distanceInput = document.querySelector(".distanceInput");
+
 const elevationGainContainer = document.querySelector(
   ".elevationGainContainer"
 );
 const cadenceContainer = document.querySelector(".cadenceContainer");
 //
-const durationInput = document.querySelector(".durationInput");
-const distanceInput = document.querySelector(".distanceInput");
-const elevationGainInput = document.querySelector(".elevationGainInput");
-const cadenceInput = document.querySelector(".cadenceInput");
+const workoutTypeInput = document.querySelectorAll(".workoutTypeInput");
+const elevationGainInput = workoutTypeInput[0];
+const cadenceInput = workoutTypeInput[1];
+//
 const workoutsContainer = document.querySelector(".workoutsContainer");
-const typeInput = document.querySelector("#typeInput");
 
+// ----------------------------------------------------------------------------------
 elevationGainContainer.style.display = "none";
 cadenceInput.setAttribute("required", "");
 
@@ -61,7 +64,7 @@ class Running extends Workout {
       months[this.date.getMonth()]
     } ${this.date.getDay()}</div>
       <div class="summaryDistance">
-        <svg
+        <svg∂
           xmlns="http://www.w3.org/2000/svg"
           height="3rem"
           viewBox="0 0 576 512"
@@ -287,20 +290,46 @@ class App {
     const { lng } = this.#mapEvent.latlng;
     const duration = parseFloat(durationInput.value).toFixed(2);
     const distance = parseFloat(distanceInput.value).toFixed(2);
-    const typeNum = parseFloat(typeInput.value).toFixed(2);
+    const workoutType = this._determineWorkOutInput(selectType.value);
     //
     workout = this._instantiateWorkoutType(
       selectType.value,
       duration,
       distance,
-      typeNum,
+      workoutType,
       lat,
       lng
     );
     //
+    console.log(workoutType);
     this.#allWorkouts.push(workout);
     this._addOnHTMLWorkouts(workout.HTML());
     this._clearInputValues();
+  }
+  _determineWorkOutInput(type) {
+    if (type === "Running") {
+      return parseFloat(cadenceInput.value).toFixed(2);
+    } else if (type === "Cycling") {
+      return parseFloat(elevationGainInput.value).toFixed(2);
+    }
+  }
+  //create an instance of either running of cycling
+  _instantiateWorkoutType(type, duration, distance, workoutType, lat, lng) {
+    if (type === "Running") {
+      return new Running(
+        [lat, lng],
+        Number(duration),
+        Number(distance),
+        Number(workoutType)
+      );
+    } else if (type === "Cycling") {
+      return new Cycling(
+        [lat, lng],
+        Number(duration),
+        Number(distance),
+        Number(workoutType)
+      );
+    }
   }
   //clears the value attribute of the inout tags
   _clearInputValues() {
@@ -309,24 +338,6 @@ class App {
       elevationGainInput.value =
       cadenceInput.value =
         "";
-  }
-  //create an instance of either running of cycling
-  _instantiateWorkoutType(type, duration, distance, workoutUnit, lat, lng) {
-    if (type === "Running") {
-      return new Running(
-        [lat, lng],
-        Number(duration),
-        Number(distance),
-        Number(workoutUnit)
-      );
-    } else if (type === "Cycling") {
-      return new Cycling(
-        [lat, lng],
-        Number(duration),
-        Number(distance),
-        Number(workoutUnit)
-      );
-    }
   }
   _addOnHTMLWorkouts(html) {
     workoutsContainer.insertAdjacentHTML("afterbegin", html);
