@@ -262,7 +262,6 @@ class App {
       attribution:
         'CycloSM &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
-
     //
     //
     this.#map.on("click", this._showForm.bind(this));
@@ -284,11 +283,13 @@ class App {
   _toggleElevationField() {
     //
     if (selectType.value === "Cycling") {
+      console.log(selectType.value);
       elevationGainContainer.style.display = "";
       elevationGainInput.setAttribute("required", "");
       cadenceInput.removeAttribute("required");
       cadenceContainer.style.display = "none";
     } else if (selectType.value === "Running") {
+      console.log(selectType.value);
       cadenceContainer.style.display = "";
       cadenceInput.setAttribute("required", "");
       elevationGainInput.removeAttribute("required");
@@ -324,6 +325,7 @@ class App {
     this.#allWorkouts.push(workout);
     this._addOnHTMLWorkouts(workout.HTML());
     this._clearInputValues();
+    this._addMarker(workout);
     //
   }
   _determineWorkOutInput(type) {
@@ -373,7 +375,9 @@ class App {
           closeOnClick: false,
           className: `${workout.type}`,
         })
-      );
+      )
+      .setPopupContent(workout.displayText())
+      .openPopup();
   }
 }
 
