@@ -17,16 +17,14 @@ select {
   border: none;
   font-family: "Poppins", sans-serif;
   outline: none;
+  color: #6e6e6e;
   border-radius: 20px;
-  color: #636363;
-  font-weight: 800;
 }
 
 body {
   font-family: "Poppins", sans-serif;
   max-height: 1861px;
   background-color: #8ec5ff;
-  min-width: 978px;
 }
 
 header {
@@ -36,11 +34,12 @@ header {
   justify-content: center;
   background: #238b24;
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 main {
   height: 73rem;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -95,7 +94,6 @@ main {
   padding: 1.5rem;
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
@@ -126,6 +124,7 @@ main {
   width: 80%;
   margin: 0 auto;
   margin-bottom: 2rem;
+  transition: opacity 0.5s ease;
 }
 
 article > label {
@@ -166,7 +165,7 @@ article > label {
 }
 
 .displayedSummary > :not(:first-child) {
-  align-self: self-end;
+  align-self: end;
 }
 
 .svgDistance {
@@ -181,10 +180,15 @@ article > label {
 
 .svgCadence {
   position: relative;
-  left: 10%;
+  left: 25%;
 }
 
 .svgSpeed {
+  position: relative;
+  left: 10%;
+}
+
+.svgElevationGain {
   position: relative;
   left: 10%;
 }
@@ -216,6 +220,72 @@ svg {
   border-left: 10px solid rgb(255, 242, 0);
 }
 
+.durationInput:focus {
+  border: 2px solid #214f8a;
+}
+
+.distanceInput:focus {
+  border: 2px solid #214f8a;
+}
+
+.elevationGainInput:focus {
+  border: 2px solid #214f8a;
+}
+
+.cadenceInput:focus {
+  border: 2px solid #214f8a;
+}
+
+select:focus {
+  border: 2px solid #214f8a;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: rgb(254, 254, 254);
+  color: rgb(72, 72, 72);
+  width: fit-content;
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  background-color: red;
+}
+
+.leaflet-popup-content {
+  font-family: "Poppins";
+  font-size: 1rem;
+  font-weight: 800;
+  width: fit-content;
+}
+
+.leaflet-popup-content p {
+  margin-left: -15px;
+}
+
+.leaflet-popup-tip-container {
+  margin-left: -30px;
+}
+
+.hidden {
+  display: none;
+}
+
+.popupInfo {
+  text-align: center;
+  width: fit-content;
+}
+
+.Cycling {
+  border-left: 20px solid rgb(255, 216, 42);
+}
+
+.Running {
+  border-left: 20px solid rgb(155, 105, 255);
+}
+
+#map {
+  user-select: none;
+}
+
 @media (height > 850px) and (width > 1857px) {
   body {
     display: flex;
@@ -244,7 +314,7 @@ svg {
     left: 10%;
   }
   .displayedSummary > :not(:first-child) {
-    align-self: center;
+    align-self: end;
   }
   .displayedSummary > div > p {
     font-size: 1rem;
@@ -262,4 +332,3 @@ svg {
   .logWorkout {
     width: 100%;
   }
-}
