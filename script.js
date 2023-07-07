@@ -1,7 +1,7 @@
 "use strict";
 
 const logWorkout = document.querySelector(".logWorkout");
-const selectType = document.querySelector(".select");
+const selectType = document.querySelector(".yeet");
 const durationInput = document.querySelector(".durationInput");
 const distanceInput = document.querySelector(".distanceInput");
 
@@ -233,10 +233,7 @@ class App {
   constructor() {
     this.#allWorkouts = [];
     this._getPosition();
-    selectType.addEventListener(
-      "change",
-      this._toggleElevationField.bind(this)
-    );
+    selectType.addEventListener("change", this._toggleElevationField());
     //
     logWorkout.addEventListener("submit", this._newWorkout.bind(this));
     logWorkout.addEventListener("input", this._checkInputValues);
@@ -281,16 +278,13 @@ class App {
   }
   // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
   _toggleElevationField() {
-    //
     if (selectType.value === "Cycling") {
-      console.log(selectType.value);
-      elevationGainContainer.style.display = "";
+      elevationGainContainer.style.display = "block";
       elevationGainInput.setAttribute("required", "");
       cadenceInput.removeAttribute("required");
       cadenceContainer.style.display = "none";
     } else if (selectType.value === "Running") {
-      console.log(selectType.value);
-      cadenceContainer.style.display = "";
+      cadenceContainer.style.display = "block";
       cadenceInput.setAttribute("required", "");
       elevationGainInput.removeAttribute("required");
       elevationGainContainer.style.display = "none";
