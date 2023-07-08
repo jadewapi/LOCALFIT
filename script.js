@@ -234,7 +234,6 @@ class App {
   #mapZoom = 13;
   // a specific coordinate that is an object that is clicked in the map div
   #mapEvent;
-  #inputValues;
   #allWorkouts;
   //
   constructor() {
@@ -318,6 +317,7 @@ class App {
   }
   // adds a new workout based on the options selected in the select HTML tag.
   _newWorkout(e) {
+    durationInput.focus();
     console.log("enter");
     e.preventDefault();
     let workout;
