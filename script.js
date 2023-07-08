@@ -17,6 +17,9 @@ const cadenceInput = workoutTypeInput[1];
 const workoutsContainer = document.querySelector(".workoutsContainer");
 // ----------------------------------------------------------------------------------
 
+elevationGainContainer.style.display = "none";
+cadenceInput.setAttribute("required", "");
+
 const months = [
   "January",
   "February",
@@ -235,8 +238,6 @@ class App {
   #allWorkouts;
   //
   constructor() {
-    elevationGainContainer.style.display = "none";
-    cadenceInput.setAttribute("required", "");
     this.clickCount = 0;
     this.marker = null;
     this.#allWorkouts = [];
@@ -255,13 +256,13 @@ class App {
     if (selectType.value === "Cycling") {
       console.log("Cycling");
       elevationGainContainer.style.display = "";
-      elevationGainInput.setAttribute("required");
+      elevationGainInput.setAttribute("required", "");
       cadenceInput.removeAttribute("required");
       cadenceContainer.style.display = "none";
     } else if (selectType.value === "Running") {
       console.log("Running");
       cadenceContainer.style.display = "";
-      cadenceInput.setAttribute("required");
+      cadenceInput.setAttribute("required", "");
       elevationGainInput.removeAttribute("required");
       elevationGainContainer.style.display = "none";
     }
@@ -297,7 +298,6 @@ class App {
     this.#mapEvent = mapEvent;
     const { lat } = this.#mapEvent.latlng;
     const { lng } = this.#mapEvent.latlng;
-    console.log(this.clickCount);
     this.clickCount++;
     if (this.clickCount % 2 === 1) {
       this.marker = L.marker([lat, lng]).addTo(this.#map).openPopup();
@@ -318,8 +318,7 @@ class App {
   }
   // adds a new workout based on the options selected in the select HTML tag.
   _newWorkout(e) {
-    console.log("elev", workoutTypeInput[0].value);
-    console.log("cad", workoutTypeInput[1].value);
+    console.log("enter");
     e.preventDefault();
     let workout;
     const { lat } = this.#mapEvent.latlng;
@@ -348,6 +347,8 @@ class App {
     this._addOnHTMLWorkouts(workout.HTML());
     this._addMarker(workout);
     this._clearInputValues();
+    cadenceInput.blur();
+    elevationGainInput.blur();
     //
   }
   _determineWorkOutInput(type) {
