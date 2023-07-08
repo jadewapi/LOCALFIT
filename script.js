@@ -1,7 +1,7 @@
 "use strict";
 
 const logWorkout = document.querySelector(".logWorkout");
-const selectType = document.querySelector(".yeet");
+const selectType = document.querySelector(".select");
 const durationInput = document.querySelector(".durationInput");
 const distanceInput = document.querySelector(".distanceInput");
 
@@ -15,8 +15,8 @@ const elevationGainInput = workoutTypeInput[0];
 const cadenceInput = workoutTypeInput[1];
 //
 const workoutsContainer = document.querySelector(".workoutsContainer");
-
 // ----------------------------------------------------------------------------------
+
 elevationGainContainer.style.display = "none";
 cadenceInput.setAttribute("required", "");
 
@@ -34,7 +34,7 @@ const months = [
   "December",
 ];
 
-// Create workout objects (Object Oriented Programming)
+// // Create workout objects (Object Oriented Programming)
 
 class Workout {
   date = new Date();
@@ -209,7 +209,7 @@ class Cycling extends Workout {
             d="M400 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm27.2 64l-61.8-48.8c-17.3-13.6-41.7-13.8-59.1-.3l-83.1 64.2c-30.7 23.8-28.5 70.8 4.3 91.6L288 305.1V416c0 17.7 14.3 32 32 32s32-14.3 32-32V288c0-10.7-5.3-20.7-14.2-26.6L295 232.9l60.3-48.5L396 217c5.7 4.5 12.7 7 20 7h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H427.2zM56 384a72 72 0 1 1 144 0A72 72 0 1 1 56 384zm200 0A128 128 0 1 0 0 384a128 128 0 1 0 256 0zm184 0a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zm200 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"
           />
         </svg>
-        <p>${this.elevationGain} <div>SPM</div>/p>
+        <p>${this.elevationGain} <div>SPM</div></p>
       </div>
     </article>
   </div>`;
@@ -231,12 +231,33 @@ class App {
   #allWorkouts;
   //
   constructor() {
+    this.clickCount = 0;
+    this.marker = null;
     this.#allWorkouts = [];
     this._getPosition();
-    selectType.addEventListener("change", this._toggleElevationField());
+    selectType.addEventListener("change", this._toggleElevationField);
     //
     logWorkout.addEventListener("submit", this._newWorkout.bind(this));
     logWorkout.addEventListener("input", this._checkInputValues);
+    workoutsContainer.addEventListener("click", function (e) {
+      console.log(e.target.closest(".workoutsContainer"));
+    });
+  }
+  // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
+  _toggleElevationField() {
+    if (selectType.value === "Cycling") {
+      console.log("Cycling");
+      elevationGainContainer.style.display = "";
+      elevationGainInput.setAttribute("required", "");
+      cadenceInput.removeAttribute("required");
+      cadenceContainer.style.display = "none";
+    } else if (selectType.value === "Running") {
+      console.log("Running");
+      cadenceContainer.style.display = "";
+      cadenceInput.setAttribute("required", "");
+      elevationGainInput.removeAttribute("required");
+      elevationGainContainer.style.display = "none";
+    }
   }
   // uses geolocation APU to get position object.
   _getPosition() {
@@ -247,7 +268,7 @@ class App {
       }
     );
   }
-  // produces the map and adds the user's location
+  //  produces the map and adds the user's location
   _loadMap(position) {
     const { latitude } = position.coords;
     const { longitude } = position.coords;
@@ -266,28 +287,25 @@ class App {
   // shows form for each odd number amount of clicks.
   _showForm(mapEvent) {
     this.#mapEvent = mapEvent;
-    console.log(this.#mapEvent);
     const { lat } = this.#mapEvent.latlng;
     const { lng } = this.#mapEvent.latlng;
+    this.clickCount++;
+    if (this.clickCount % 2 === 1) {
+      this.marker = L.marker([lat, lng]).addTo(this.#map).openPopup();
+    } else if (this.clickCount % 2 === 0) {
+      if (this.marker) {
+        this.#map.removeLayer(this.marker);
+        this.marker = null;
+      }
+    }
     logWorkout.classList.toggle("hidden");
+    logWorkout.classList.toggle("show");
   }
   _checkInputValues(event) {
-    const inputValue = event.target.value;
-    const sanitizedValue = inputValue.replace(/[^0-9.]/g, "");
-    event.target.value = sanitizedValue;
-  }
-  // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
-  _toggleElevationField() {
-    if (selectType.value === "Cycling") {
-      elevationGainContainer.style.display = "block";
-      elevationGainInput.setAttribute("required", "");
-      cadenceInput.removeAttribute("required");
-      cadenceContainer.style.display = "none";
-    } else if (selectType.value === "Running") {
-      cadenceContainer.style.display = "block";
-      cadenceInput.setAttribute("required", "");
-      elevationGainInput.removeAttribute("required");
-      elevationGainContainer.style.display = "none";
+    if (event.target.tagName === "INPUT") {
+      const inputValue = event.target.value;
+      const sanitizedValue = inputValue.replace(/[^0-9.]/g, "");
+      event.target.value = sanitizedValue;
     }
   }
   // adds a new workout based on the options selected in the select HTML tag.
@@ -329,7 +347,7 @@ class App {
       return Number(parseFloat(elevationGainInput.value).toFixed(2));
     }
   }
-  //create an instance of either running of cycling
+  // //create an instance of either running of cycling
   _instantiateWorkoutType(type, duration, distance, workoutType, lat, lng) {
     if (type === "Running") {
       return new Running(
@@ -347,7 +365,7 @@ class App {
       );
     }
   }
-  //clears the value attribute of the inout tags
+  // //clears the value attribute of the inout tags
   _clearInputValues() {
     durationInput.value =
       distanceInput.value =

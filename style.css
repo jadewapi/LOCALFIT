@@ -60,10 +60,15 @@ main {
   background-color: #8ec5ff;
 }
 
+.leaflet-container .leaflet-marker-pane img {
+  filter: hue-rotate(-200deg);
+}
+
 #map {
   width: 70%;
   height: 100%;
-  filter: saturate(1.5);
+  filter: hue-rotate(20);
+  filter: saturate(1.7);
 }
 
 .map {
@@ -120,11 +125,13 @@ main {
 .logWorkout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 10rem;
+  height: 0;
   width: 80%;
   margin: 0 auto;
+  scale: 0;
+  opacity: 0;
   margin-bottom: 2rem;
-  transition: opacity 0.5s ease;
+  transition: all 0.5s ease;
 }
 
 article > label {
@@ -212,14 +219,6 @@ svg {
   color: white;
 }
 
-.running {
-  border-left: 10px solid rgb(255, 0, 0);
-}
-
-.cycling {
-  border-left: 10px solid rgb(255, 242, 0);
-}
-
 .durationInput:focus {
   border: 2px solid #214f8a;
 }
@@ -266,7 +265,9 @@ select:focus {
 }
 
 .hidden {
-  display: none;
+  height: 10rem;
+  opacity: 1;
+  scale: 1;
 }
 
 .popupInfo {
@@ -275,11 +276,11 @@ select:focus {
 }
 
 .Cycling {
-  border-left: 20px solid rgb(255, 216, 42);
+  border-left: 20px solid #a75ade;
 }
 
 .Running {
-  border-left: 20px solid rgb(155, 105, 255);
+  border-left: 20px solid #fff942;
 }
 
 #map {
@@ -318,6 +319,12 @@ select:focus {
   }
   .displayedSummary > div > p {
     font-size: 1rem;
+  }
+}
+
+@media (width < 52em) {
+  article > label {
+    font-size: 1.2rem;
   }
 }
 
