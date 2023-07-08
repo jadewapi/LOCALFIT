@@ -127,11 +127,11 @@ main {
 .logWorkout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  /* height: 0; */
+  height: 0;
   width: 80%;
   margin: 0 auto;
-  /* scale: 0;
-  opacity: 0; */
+  scale: 0;
+  opacity: 0;
   margin-bottom: 2rem;
   transition: all 0.5s ease;
 }
@@ -307,16 +307,25 @@ select:focus {
 .delete {
   height: 3rem;
   position: absolute;
-  left: 1%;
+  right: 1%;
   top: 4%;
   fill: #228b25;
   transition: all 0.5s ease;
 }
 
+.itemNum {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #228b25;
+}
+
 .delete:hover {
   position: absolute;
   scale: 1.5;
-  left: 1%;
+  right: 1%;
   top: 4%;
   fill: rgb(255, 0, 0);
 }
