@@ -92,6 +92,7 @@ main {
 }
 
 .specificWorkout {
+  position: relative;
   margin: 0 auto;
   width: 90%;
   border-radius: 20px;
@@ -220,23 +221,38 @@ svg {
 }
 
 .durationInput:focus {
-  border: 2px solid #214f8a;
+  border: 4px solid #228b25;
+  box-sizing: border-box;
 }
 
 .distanceInput:focus {
-  border: 2px solid #214f8a;
+  border: 4px solid #228b25;
+  box-sizing: border-box;
 }
 
 .elevationGainInput:focus {
-  border: 2px solid #214f8a;
+  border: 4px solid #228b25;
+  box-sizing: border-box;
 }
 
 .cadenceInput:focus {
-  border: 2px solid #214f8a;
+  border: 4px solid #228b25;
+  box-sizing: border-box;
+}
+
+.elevationGainContainer > input:focus {
+  border: 4px solid #228b25;
+  box-sizing: border-box;
+}
+
+.cadenceContainer > input:focus {
+  border: 4px solid #228b25;
+  box-sizing: border-box;
 }
 
 select:focus {
-  border: 2px solid #214f8a;
+  border: 4px solid #228b25;
+  box-sizing: border-box;
 }
 
 .leaflet-popup-content-wrapper {
@@ -287,6 +303,23 @@ select:focus {
   user-select: none;
 }
 
+.delete {
+  height: 3rem;
+  position: absolute;
+  left: 1%;
+  top: 4%;
+  fill: #228b25;
+  transition: all 0.5s ease;
+}
+
+.delete:hover {
+  position: absolute;
+  scale: 1.5;
+  left: 1%;
+  top: 4%;
+  fill: rgb(255, 0, 0);
+}
+
 @media (height > 850px) and (width > 1857px) {
   body {
     display: flex;
@@ -296,7 +329,7 @@ select:focus {
   }
 }
 
-@media (height > 850px) and (width < 978px) {
+@media (height > 830px) and (832px < width < 978px) {
   body {
     display: flex;
     flex-direction: column;
@@ -305,6 +338,14 @@ select:focus {
   }
 }
 
+/* 1824 */
+@media (width < 80em) {
+  .delete {
+    height: 2.5rem;
+  }
+}
+
+/* 1184 */
 @media (width < 74em) {
   .summaryType {
     font-size: 2.3rem;
@@ -322,12 +363,7 @@ select:focus {
   }
 }
 
-@media (width < 52em) {
-  article > label {
-    font-size: 1.2rem;
-  }
-}
-
+/* 1104 */
 @media (width < 69em) {
   .summaryType {
     font-size: 2rem;
@@ -335,8 +371,34 @@ select:focus {
   }
 }
 
-@media (width < 64em) {
+/* 1024 */
+@media (width < 63em) {
   .logWorkout {
     width: 100%;
+  }
+  .delete {
+    height: 2rem;
+  }
+}
+
+@media (width < 58em) {
+  .summaryType {
+    font-size: 1rem;
+  }
+}
+
+/* 832 */
+@media (width < 52em) {
+  .mainWrapper {
+    display: block;
+  }
+  .interface {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+  }
+  #map {
+    width: 100%;
+    margin: 0 auto;
   }
 }
