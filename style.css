@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 html {
@@ -126,11 +127,11 @@ main {
 .logWorkout {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 0;
+  /* height: 0; */
   width: 80%;
   margin: 0 auto;
-  scale: 0;
-  opacity: 0;
+  /* scale: 0;
+  opacity: 0; */
   margin-bottom: 2rem;
   transition: all 0.5s ease;
 }
@@ -383,7 +384,7 @@ select:focus {
 
 @media (width < 58em) {
   .summaryType {
-    font-size: 1rem;
+    font-size: 1.7rem;
   }
 }
 
