@@ -15,6 +15,7 @@ const elevationGainInput = workoutTypeInput[0];
 const cadenceInput = workoutTypeInput[1];
 //
 const workoutsContainer = document.querySelector(".workoutsContainer");
+
 // ----------------------------------------------------------------------------------
 
 elevationGainContainer.style.display = "none";
@@ -221,7 +222,7 @@ class Cycling extends Workout {
             d="M400 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm27.2 64l-61.8-48.8c-17.3-13.6-41.7-13.8-59.1-.3l-83.1 64.2c-30.7 23.8-28.5 70.8 4.3 91.6L288 305.1V416c0 17.7 14.3 32 32 32s32-14.3 32-32V288c0-10.7-5.3-20.7-14.2-26.6L295 232.9l60.3-48.5L396 217c5.7 4.5 12.7 7 20 7h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H427.2zM56 384a72 72 0 1 1 144 0A72 72 0 1 1 56 384zm200 0A128 128 0 1 0 0 384a128 128 0 1 0 256 0zm184 0a72 72 0 1 1 144 0 72 72 0 1 1 -144 0zm200 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"
           />
         </svg>
-        <p>${this.elevationGain} <div>SPM</div></p>
+        <p>${this.elevationGain} <div>Meters</div></p>
       </div>
     </article>
   </div>`;
@@ -250,14 +251,21 @@ class App {
     //
     logWorkout.addEventListener("submit", this._newWorkout.bind(this));
     logWorkout.addEventListener("input", this._checkInputValues);
-    workoutsContainer.addEventListener("click", function (e) {
-      if (e.target.closest(".delete")) {
-        console.log("delete");
-      }
-      if (e.target.closest(".specificWorkout")) {
-        console.log("delete");
-      }
-    });
+    workoutsContainer.addEventListener("click", this._flyToMarker.bind(this));
+  }
+  _flyToMarker(e) {
+    if (e.target.closest(".delete")) {
+    }
+    if (e.target.closest(".specificWorkout")) {
+      const specificWorkout = e.target.closest(".specificWorkout").dataset.id;
+      const specificWorkoutObj = this.#allWorkouts.find(
+        (obj) => obj.id === Number(specificWorkout)
+      );
+      this.#map.flyTo(specificWorkoutObj.coordinates, this.#mapZoom, {
+        duration: 1,
+        easeLinearity: 2,
+      });
+    }
   }
   // toggles the options in the select HTML tag to show either elevation(running) or cadence(cycling)
   _toggleElevationField() {
@@ -348,11 +356,12 @@ class App {
       this._clearInputValues();
     }
     //
-    console.log(workout);
     this.#allWorkouts.push(workout);
     this._addOnHTMLWorkouts(workout.HTML());
     this._addMarker(workout);
     this._clearInputValues();
+    console.log(workout);
+    console.log(this.#allWorkouts);
     //
   }
   _determineWorkOutInput(type) {
