@@ -42,8 +42,8 @@ class Workout {
   date = new Date();
   id = this.date.getTime() + 1;
   //
-  constructor(oordinates, duration, distance) {
-    this.marker = marker;
+  constructor(coordinates, duration, distance) {
+    this.marker = null;
     this.coordinates = coordinates;
     this.duration = this.roundTwoDecimalPlaces(duration);
     this.distance = this.roundTwoDecimalPlaces(distance);
@@ -57,7 +57,7 @@ class Workout {
 
 class Running extends Workout {
   constructor(coordinates, duration, distance, cadence) {
-    super(marker, coordinates, duration, distance);
+    super(coordinates, duration, distance);
     this.type = "Running";
     this.cadence = this.roundTwoDecimalPlaces(cadence);
     this.calculatePace();
@@ -365,6 +365,7 @@ class App {
     this._addMarker(workout);
     this._clearInputValues();
     console.log(workout);
+    console.log(this.#allWorkouts);
     //
   }
   _determineWorkOutInput(type) {
@@ -408,7 +409,7 @@ class App {
     workoutsContainer.insertAdjacentHTML("afterbegin", html);
   }
   _addMarker(workout) {
-    workout.#marker = L.marker(workout.coordinates)
+    L.marker(workout.coordinates)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
