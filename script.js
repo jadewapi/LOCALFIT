@@ -43,6 +43,7 @@ class Workout {
   id = this.date.getTime() + 1;
   //
   constructor(coordinates, duration, distance) {
+    this.marker = null;
     this.coordinates = coordinates;
     this.duration = this.roundTwoDecimalPlaces(duration);
     this.distance = this.roundTwoDecimalPlaces(distance);
@@ -251,9 +252,12 @@ class App {
     //
     logWorkout.addEventListener("submit", this._newWorkout.bind(this));
     logWorkout.addEventListener("input", this._checkInputValues);
-    workoutsContainer.addEventListener("click", this._flyToMarker.bind(this));
+    workoutsContainer.addEventListener(
+      "click",
+      this._handleSpecificWorkoutOutClick.bind(this)
+    );
   }
-  _flyToMarker(e) {
+  _handleSpecificWorkoutOutClick(e) {
     if (e.target.closest(".delete")) {
     }
     if (e.target.closest(".specificWorkout")) {
