@@ -362,10 +362,7 @@ class App {
     //
     this.#allWorkouts.push(workout);
     this._addOnHTMLWorkouts(workout.HTML());
-    this._addMarker(workout);
     this._clearInputValues();
-    console.log(workout);
-    console.log(this.#allWorkouts);
     //
   }
   _determineWorkOutInput(type) {
@@ -407,21 +404,6 @@ class App {
   }
   _addOnHTMLWorkouts(html) {
     workoutsContainer.insertAdjacentHTML("afterbegin", html);
-  }
-  _addMarker(workout) {
-    L.marker(workout.coordinates)
-      .addTo(this.#map)
-      .bindPopup(
-        L.popup({
-          maxWidth: 250,
-          minWidth: 100,
-          autoClose: false,
-          closeOnClick: false,
-          className: `${workout.type}`,
-        })
-      )
-      .setPopupContent(workout.displayText())
-      .openPopup();
   }
 }
 
