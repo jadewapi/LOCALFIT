@@ -43,7 +43,6 @@ class Workout {
   id = this.date.getTime() + 1;
   //
   constructor(coordinates, duration, distance) {
-    this.marker = null;
     this.coordinates = coordinates;
     this.duration = this.roundTwoDecimalPlaces(duration);
     this.distance = this.roundTwoDecimalPlaces(distance);
@@ -67,11 +66,8 @@ class Running extends Workout {
     return (this.pace = this.roundTwoDecimalPlaces(pace));
   }
   HTML() {
-    return `<div class="specificWorkout" data-id="${this.id}">
+    return `<div class="specificWorkout" data-id="${this.id}" tabindex="0">
     <p class="itemNum">#${this.item}<p>
-    <svg class="delete" data-id="${
-      this.id
-    }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
     <article class="displayedSummary">
       <div class="summaryType">${this.type} on ${
       months[this.date.getMonth()]
@@ -160,11 +156,8 @@ class Cycling extends Workout {
     return (this.speed = this.roundTwoDecimalPlaces(speed));
   }
   HTML() {
-    return `<div class="specificWorkout" data-id="${this.id}">
+    return `<div class="specificWorkout" data-id="${this.id}" tabindex="0">
     <p class="itemNum">#${this.item}<p>
-    <svg class="delete" data-id="${
-      this.id
-    }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></svg>
     <article class="displayedSummary">
       <div class="summaryType">${this.type} on  ${
       months[this.date.getMonth()]
@@ -258,8 +251,6 @@ class App {
     );
   }
   _handleSpecificWorkoutOutClick(e) {
-    if (e.target.closest(".delete")) {
-    }
     if (e.target.closest(".specificWorkout")) {
       const specificWorkout = e.target.closest(".specificWorkout").dataset.id;
       const specificWorkoutObj = this.#allWorkouts.find(
@@ -314,6 +305,9 @@ class App {
   _showForm(mapEvent) {
     durationInput.focus();
     this.#mapEvent = mapEvent;
+    this._showMarker();
+  }
+  _showMarker() {
     const { lat } = this.#mapEvent.latlng;
     const { lng } = this.#mapEvent.latlng;
     this.clickCount++;
@@ -365,7 +359,6 @@ class App {
     this._addMarker(workout);
     this._clearInputValues();
     console.log(workout);
-    console.log(this.#allWorkouts);
     //
   }
   _determineWorkOutInput(type) {
@@ -409,7 +402,7 @@ class App {
     workoutsContainer.insertAdjacentHTML("afterbegin", html);
   }
   _addMarker(workout) {
-    L.marker(workout.coordinates)
+    workout.marker = L.marker(workout.coordinates)
       .addTo(this.#map)
       .bindPopup(
         L.popup({
