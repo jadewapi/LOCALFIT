@@ -56,8 +56,8 @@ class Workout {
 }
 
 class Running extends Workout {
-  constructor(coordinates, duration, distance, cadence) {
-    super(coordinates, duration, distance);
+  constructor(marker, coordinates, duration, distance, cadence) {
+    super(marker, coordinates, duration, distance);
     this.type = "Running";
     this.cadence = this.roundTwoDecimalPlaces(cadence);
     this.calculatePace();
@@ -146,8 +146,8 @@ class Running extends Workout {
 }
 
 class Cycling extends Workout {
-  constructor(coordinates, duration, distance, elevationGain) {
-    super(coordinates, duration, distance);
+  constructor(marker, coordinates, duration, distance, elevationGain) {
+    super(marker, coordinates, duration, distance);
     this.type = "Cycling";
     this.elevationGain = this.roundTwoDecimalPlaces(elevationGain);
     this.calculateSpeed();
@@ -364,8 +364,6 @@ class App {
     this._addOnHTMLWorkouts(workout.HTML());
     this._addMarker(workout);
     this._clearInputValues();
-    console.log(workout);
-    console.log(this.#allWorkouts);
     //
   }
   _determineWorkOutInput(type) {
