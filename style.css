@@ -330,11 +330,6 @@ select:focus {
   fill: rgb(255, 0, 0);
 }
 
-.specificWorkout[data-id="placeholder"] {
-  background-color: #3fb135;
-  display: none;
-}
-
 @media (height > 850px) and (width > 1857px) {
   body {
     display: flex;
